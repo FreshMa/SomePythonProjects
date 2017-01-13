@@ -18,21 +18,13 @@ class GitSpider(scrapy.Spider):
         'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'
         }
         
-        #the para "cookies" of Request must be a dict object
-        self.cookie = {'logged_in':'no',
-        '_gat':1,
-        '_octo':'',
-        '_gh_sess':'',
-        '_ga':'',
-        'tz':''
-        }
 
     def start_requests(self):
         for lang in self.lang_list:
             url_lang = quote(lang)
             url = 'https://github.com/search?l=' + url_lang + '&o=desc&q=' + url_lang+\
             '&s=stars&type=Repositories&utf8=%E2%9C%93'
-            yield scrapy.Request(url, callback=self.parse, headers=self.head, cookies=self.cookie)
+            yield scrapy.Request(url, callback=self.parse, headers=self.head)
 
     def parse(self, response):
 
