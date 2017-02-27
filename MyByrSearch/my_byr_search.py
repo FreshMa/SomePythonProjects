@@ -103,6 +103,8 @@ class ByrSearch():
                     t2 = tr('td',class_='title_10')
                     
                     #iff the length of re is 7, the search result is not empty
+                    #however, length of some trs is 7 but doesn't have useful content,may be it's not structrued
+                    #waiting for further research
                     if length==7 and t1:
                         href = t_url+t1[0]('a')[0]['href']
                         string = t1[0]('a')[0].string
