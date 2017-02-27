@@ -60,9 +60,10 @@ class ByrSearch():
         '''
         @param au: author of the post
         @param tl: title keyword of the post
+        complete s_url with your bbs id
         '''
         p_url = 'https://bbs.byr.cn/s/article?t1='+tl+'&au='+au+'&b='
-        s_url = '&_uid=zzt1993520'
+        s_url = '&_uid=YOUR_ID'
         t_url = 'https://bbs.byr.cn'
         
         for i in self.name_list:
