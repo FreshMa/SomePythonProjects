@@ -86,7 +86,11 @@ class ByrSearch():
             r = self.session.get(url,headers = self.header)
             html = r.text
             soup = BeautifulSoup(html,'lxml')
-            page_num = int(soup.find('ol',class_='page-main')('li')[-2].string)
+            try:
+                page_num = int(soup.find('ol',class_='page-main')('li')[-2].string)
+            #if the result page number is 1 or 0,catch the IndexError and set the page_num to 1
+            except IndexError:
+                page_num = 1
 
             
             for j in range(1,page_num+1):
