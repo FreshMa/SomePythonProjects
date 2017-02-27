@@ -1,6 +1,7 @@
 import requests
 import re
 from bs4 import BeautifulSoup
+from urllib import quote
 
 class ByrSearch():
 
@@ -91,4 +92,5 @@ if __name__ == '__main__':
     obj = ByrSearch()
     au = ''
     tl = 'test'
+    tl = quote(tl)
     obj.search(au,tl)
