@@ -65,9 +65,10 @@ class ByrSearch():
         '''
         @param au: author of the post
         @param tl: title keyword of the post
+        use your bbs id to complete the s_url
         '''
         p_url = 'https://bbs.byr.cn/s/article?t1='+tl+'&au='+au+'&b='
-        s_url = '&_uid=zzt1993520'
+        s_url = '&_uid=YOUR_ID'
         t_url = 'https://bbs.byr.cn'
         
         #if the borad name is not specified,use the attr of the object
