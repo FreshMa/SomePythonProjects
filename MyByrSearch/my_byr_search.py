@@ -68,7 +68,9 @@ class ByrSearch():
         p_url = 'https://bbs.byr.cn/s/article?t1='+tl+'&au='+au+'&b='
         s_url = '&_uid=zzt1993520'
         t_url = 'https://bbs.byr.cn'
-
+        
+        #if the borad name is not specified,use the attr of the object
+        #else use the specific board name
         if b:
             self.name_list = [b]
         
@@ -111,5 +113,6 @@ if __name__ == '__main__':
     obj = ByrSearch()
     au = ''
     tl = 'test'
+    b = ''
     tl = quote(tl)
-    obj.search(au,tl)
+    obj.search(au,tl,b)
