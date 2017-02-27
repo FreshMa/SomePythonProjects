@@ -2,7 +2,10 @@ import requests
 import re
 from bs4 import BeautifulSoup
 from urllib import quote
-
+'''
+@author:FreshMa
+@date:17/02/27
+'''
 class ByrSearch():
 
     '''
@@ -57,36 +60,52 @@ class ByrSearch():
                     name_list.append(result.group(1))
         return name_list
     
-    def search(self,au,tl):
+    def search(self,au,tl,b):
         '''
         @param au: author of the post
         @param tl: title keyword of the post
-        complete s_url with your bbs id
         '''
         p_url = 'https://bbs.byr.cn/s/article?t1='+tl+'&au='+au+'&b='
-        s_url = '&_uid=YOUR_ID'
+        s_url = '&_uid=zzt1993520'
         t_url = 'https://bbs.byr.cn'
+
+        if b:
+            self.name_list = [b]
         
         for i in self.name_list:
+            '''
+            traverse all the boards,first, get the page number of each board
+            then, print some infomation of the search result of each page
+            '''
             url = p_url+str(i)+s_url
-            
+            #print url
             r = self.session.get(url,headers = self.header)
             html = r.text
             soup = BeautifulSoup(html,'lxml')
-           
-            tr_list = soup.find_all('tr')
-            for tr in tr_list:
-                length = len(tr)
-                t1 = tr('td',class_='title_9')
-                t2 = tr('td',class_='title_10')
-                if length==7 and t1:
-                    href = t_url+t1[0]('a')[0]['href']
-                    string = t1[0]('a')[0].string
-                    time = t2[0].string
+            page_num = int(soup.find('ol',class_='page-main')('li')[-2].string)
 
-                    print time+' '*4+href+'\n'+' '*14+string+'\n'
+            
+            for j in range(1,page_num+1):
+                url = p_url+str(i)+s_url+'&p='+str(j)
+                
+                r = self.session.get(url,headers = self.header)
+                html = r.text
+                soup = BeautifulSoup(html,'lxml')
+
+                tr_list = soup.find_all('tr')    
+                for tr in tr_list:
+                    length = len(tr)
+                    t1 = tr('td',class_='title_9')
+                    t2 = tr('td',class_='title_10')
                     
+                    #iff the length of re is 7, the search result is not empty
+                    if length==7 and t1:
+                        href = t_url+t1[0]('a')[0]['href']
+                        string = t1[0]('a')[0].string
+                        time = t2[0].string
 
+                        print time+' '*4+href+'\n'+' '*14+string+'\n'          
+                        
                 
 if __name__ == '__main__':
     obj = ByrSearch()
