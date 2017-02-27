@@ -21,3 +21,5 @@
 - hashlib
 - os
 - shutil
+- platform
+- sys
